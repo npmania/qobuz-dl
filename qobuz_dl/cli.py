@@ -68,15 +68,6 @@ def _reset_config(config_file):
     )
 
 
-def _remove_leftovers(directory):
-    directory = os.path.join(directory, "**", ".*.tmp")
-    for i in glob.glob(directory, recursive=True):
-        try:
-            os.remove(i)
-        except:  # noqa
-            pass
-
-
 def _handle_commands(qobuz, arguments):
     try:
         if arguments.command == "dl":
@@ -95,9 +86,6 @@ def _handle_commands(qobuz, arguments):
             f"{RED}Interrupted by user\n{YELLOW}Already downloaded items will "
             "be skipped if you try to download the same releases again."
         )
-
-    finally:
-        _remove_leftovers(qobuz.directory)
 
 
 def _initial_checks():
